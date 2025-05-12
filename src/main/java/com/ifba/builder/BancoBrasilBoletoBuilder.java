@@ -4,11 +4,13 @@ import com.ifba.model.boleto.Banco;
 import com.ifba.model.boleto.Boleto;
 import com.ifba.model.boleto.ContaBancaria;
 import com.ifba.model.entidade.Entidade;
+import lombok.Getter;
 
 import java.time.LocalDate;
 
 
 
+@Getter
 public class BancoBrasilBoletoBuilder implements BoletoBuilder {
     private final Boleto boleto;
 
@@ -38,11 +40,6 @@ public class BancoBrasilBoletoBuilder implements BoletoBuilder {
         boleto.setBanco(Banco.BANCO_DO_BRASIL);
     }
 
-
-
-    public Boleto getBoleto() {
-        return boleto;
-    }
 
     public String gerarCampoLivre(String agencia, String conta, String nossoNumero, String carteira) {
         return String.format("%04d%08d%011d%02d",

@@ -20,7 +20,7 @@ public class BoletoPdfGenerator {
             Font fonteTexto = new Font(Font.FontFamily.HELVETICA, 10);
             Font fonteCampo = new Font(Font.FontFamily.HELVETICA, 9);
 
-            // Cabeçalho
+
             PdfPTable cabecalho = new PdfPTable(new float[]{2, 6, 2});
             cabecalho.setWidthPercentage(100);
             cabecalho.setSpacingAfter(8f);
@@ -29,7 +29,7 @@ public class BoletoPdfGenerator {
             cabecalho.addCell(celula("Vencimento:\n" + formatDate(boleto.getTitulo().getDataVencimento()), fonteTexto, Element.ALIGN_CENTER));
             document.add(cabecalho);
 
-            // Local pagamento
+
             PdfPTable localPgto = new PdfPTable(new float[]{7, 3});
             localPgto.setWidthPercentage(100);
             localPgto.setSpacingAfter(5f);
@@ -37,7 +37,7 @@ public class BoletoPdfGenerator {
             localPgto.addCell(celula("Vencimento:\n" + formatDate(boleto.getTitulo().getDataVencimento()), fonteCampo, Element.ALIGN_CENTER));
             document.add(localPgto);
 
-            // Cedente
+
             PdfPTable cedente = new PdfPTable(new float[]{7, 3});
             cedente.setWidthPercentage(100);
             cedente.setSpacingAfter(5f);
@@ -45,7 +45,7 @@ public class BoletoPdfGenerator {
             cedente.addCell(celula("Agência/Código Cedente: " + boleto.getConta().getAgencia() + "/" + boleto.getBeneficiario().getCnpjOrCpf(), fonteCampo, Element.ALIGN_LEFT));
             document.add(cedente);
 
-            // Campos técnicos (data doc, número doc, valor etc)
+
             PdfPTable info = new PdfPTable(new float[]{2, 2, 2, 1, 2, 2, 2});
             info.setWidthPercentage(100);
             info.setSpacingAfter(5f);
@@ -58,7 +58,7 @@ public class BoletoPdfGenerator {
             addCampo(info, "Valor do documento", "R$ " + boleto.getTitulo().getValor());
             document.add(info);
 
-            // Instruções + descontos/multa
+
             PdfPTable instrucoes = new PdfPTable(new float[]{7, 3});
             instrucoes.setWidthPercentage(100);
             instrucoes.setSpacingAfter(5f);
@@ -73,7 +73,7 @@ public class BoletoPdfGenerator {
             instrucoes.addCell(cell);
             document.add(instrucoes);
 
-            // Sacado
+
             PdfPTable sacado = new PdfPTable(1);
             sacado.setWidthPercentage(100);
             sacado.setSpacingAfter(5f);
@@ -84,7 +84,7 @@ public class BoletoPdfGenerator {
                     + " - CEP: " + boleto.getSacado().getEndereco().getCep(), fonteCampo, Element.ALIGN_LEFT));
             document.add(sacado);
 
-            // Código de Barras
+
             PdfContentByte cb = writer.getDirectContent();
             BarcodeInter25 barcode = new BarcodeInter25();
 
