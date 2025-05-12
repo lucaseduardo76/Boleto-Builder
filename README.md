@@ -24,5 +24,4 @@ Este projeto é um **gerador de boletos bancários** em Java utilizando o **padr
 - `Scanner` (entrada via terminal)
 - iText (para geração de PDF)
 
-## 📂 Estrutura do projeto
 
