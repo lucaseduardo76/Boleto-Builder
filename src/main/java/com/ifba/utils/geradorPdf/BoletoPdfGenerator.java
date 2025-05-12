@@ -5,6 +5,8 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 
 import java.io.FileOutputStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class BoletoPdfGenerator {
 
@@ -22,9 +24,9 @@ public class BoletoPdfGenerator {
             PdfPTable cabecalho = new PdfPTable(new float[]{2, 6, 2});
             cabecalho.setWidthPercentage(100);
             cabecalho.setSpacingAfter(8f);
-            cabecalho.addCell(celula(boleto.getBanco().getNome(), fonteTitulo, Element.ALIGN_CENTER));
+            cabecalho.addCell(celula(boleto.getBanco().getNome()+ " " + boleto.getBanco().getCodigo(), fonteTitulo, Element.ALIGN_CENTER));
             cabecalho.addCell(celula(boleto.getLinhaDigitavel(), fonteTexto, Element.ALIGN_CENTER));
-            cabecalho.addCell(celula("Vencimento:\n" + boleto.getTitulo().getDataVencimento(), fonteTexto, Element.ALIGN_CENTER));
+            cabecalho.addCell(celula("Vencimento:\n" + formatDate(boleto.getTitulo().getDataVencimento()), fonteTexto, Element.ALIGN_CENTER));
             document.add(cabecalho);
 
             // Local pagamento
@@ -32,7 +34,7 @@ public class BoletoPdfGenerator {
             localPgto.setWidthPercentage(100);
             localPgto.setSpacingAfter(5f);
             localPgto.addCell(celula("Local de pagamento: Pagável em qualquer banco até o vencimento", fonteCampo, Element.ALIGN_LEFT));
-            localPgto.addCell(celula("Vencimento:\n" + boleto.getTitulo().getDataVencimento(), fonteCampo, Element.ALIGN_CENTER));
+            localPgto.addCell(celula("Vencimento:\n" + formatDate(boleto.getTitulo().getDataVencimento()), fonteCampo, Element.ALIGN_CENTER));
             document.add(localPgto);
 
             // Cedente
@@ -51,7 +53,7 @@ public class BoletoPdfGenerator {
             addCampo(info, "Número do documento", boleto.getTitulo().getNumeroDocumento());
             addCampo(info, "Espécie do documento", "DM");
             addCampo(info, "Aceite", "N");
-            addCampo(info, "Data do processamento", "10/05/2025");
+            addCampo(info, "Data do processamento", formatDate(LocalDate.now().minusDays(5)));
             addCampo(info, "Nosso número", boleto.getNumeroUnico());
             addCampo(info, "Valor do documento", "R$ " + boleto.getTitulo().getValor());
             document.add(info);
@@ -132,6 +134,11 @@ public class BoletoPdfGenerator {
         cell.setPadding(4);
         cell.addElement(p);
         tabela.addCell(cell);
+    }
+
+    private static String formatDate(LocalDate date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return date.format(formatter);
     }
 }
 
