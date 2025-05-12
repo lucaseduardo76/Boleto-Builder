@@ -7,21 +7,19 @@ import com.ifba.model.entidade.Entidade;
 
 import java.time.LocalDate;
 
-
-
-public class BancoBrasilBoletoBuilder implements BoletoBuilder {
+public class BradescoBoletoBuilder implements BoletoBuilder {
     private final Boleto boleto;
 
-    public BancoBrasilBoletoBuilder() {
+    public BradescoBoletoBuilder() {
         this.boleto = new Boleto();
     }
 
-    public void buildBeneficiario(Entidade Beneficiario) {
-        boleto.setBeneficiario(Beneficiario);
+    public void buildBeneficiario(Entidade beneficiario) {
+        boleto.setBeneficiario(beneficiario);
     }
 
-    public void buildSacado(Entidade Sacado) {
-        boleto.setSacado(Sacado);
+    public void buildSacado(Entidade sacado) {
+        boleto.setSacado(sacado);
     }
 
     public void buildTitulo(String doc, LocalDate vencimento, double valor) {
@@ -35,10 +33,8 @@ public class BancoBrasilBoletoBuilder implements BoletoBuilder {
     }
 
     public void buildBanco() {
-        boleto.setBanco(Banco.BANCO_DO_BRASIL);
+        boleto.setBanco(Banco.BRADESCO);
     }
-
-
 
     public Boleto getBoleto() {
         return boleto;
@@ -51,7 +47,4 @@ public class BancoBrasilBoletoBuilder implements BoletoBuilder {
                 Long.parseLong(nossoNumero),
                 Integer.parseInt(carteira));
     }
-
-
-
 }

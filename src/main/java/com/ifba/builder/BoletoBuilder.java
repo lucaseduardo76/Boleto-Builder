@@ -12,8 +12,6 @@ public interface BoletoBuilder {
     void buildTitulo(String numeroDocumento, LocalDate vencimento, double valor);
     void buildDadosBancarios(ContaBancaria contaBancaria);
     void buildBanco();
-    void buildLinhaDigitavel();
-    void buildCodigoBarras();
 
     Boleto getBoleto();
 

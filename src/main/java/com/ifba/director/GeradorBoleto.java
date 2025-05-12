@@ -40,8 +40,6 @@ public class GeradorBoleto {
 
         builder.buildDadosBancarios(contaBancaria);
         builder.buildBanco();
-        builder.buildLinhaDigitavel();
-        builder.buildCodigoBarras();
 
         builder.getBoleto().setLinhaDigitavel(CodigoBarra.gerarCodigoBarras(builder.getBoleto(), builder));
         builder.getBoleto().setCodigoBarras(CodigoBarra.gerarCodigoBarras(builder.getBoleto(), builder));

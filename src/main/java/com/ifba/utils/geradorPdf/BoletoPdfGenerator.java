@@ -22,7 +22,7 @@ public class BoletoPdfGenerator {
             PdfPTable cabecalho = new PdfPTable(new float[]{2, 6, 2});
             cabecalho.setWidthPercentage(100);
             cabecalho.setSpacingAfter(8f);
-            cabecalho.addCell(celula("Banco L.E", fonteTitulo, Element.ALIGN_CENTER));
+            cabecalho.addCell(celula(boleto.getBanco().getNome(), fonteTitulo, Element.ALIGN_CENTER));
             cabecalho.addCell(celula(boleto.getLinhaDigitavel(), fonteTexto, Element.ALIGN_CENTER));
             cabecalho.addCell(celula("Vencimento:\n" + boleto.getTitulo().getDataVencimento(), fonteTexto, Element.ALIGN_CENTER));
             document.add(cabecalho);
@@ -104,7 +104,7 @@ public class BoletoPdfGenerator {
             barcodeImage.setAlignment(Element.ALIGN_CENTER);
             document.add(barcodeImage);
 
-            document.add(new Paragraph(boleto.getCodigoBarras(), fonteTexto));
+
 
             document.close();
             writer.close();
